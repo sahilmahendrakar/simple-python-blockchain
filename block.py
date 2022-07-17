@@ -1,5 +1,5 @@
 from datetime import datetime
-import hashlib
+from utils import applySha256
 
 class Block:
     def __init__(self, data, previousHash):
@@ -17,13 +17,11 @@ class Block:
 
     def mine(self, difficulty):
         target = "0"*difficulty
-        print(target)
+        # print(target)
         while not self.hash[:difficulty] == target:
             self.nonce += 1
             self.hash = self.calcHash()
-            print(self.hash[:difficulty])
+            # print(self.hash[:difficulty])
         print("Block mined")
 
 
-def applySha256(input):
-    return hashlib.sha256(bytes(input, 'utf-8')).hexdigest()

@@ -1,8 +1,19 @@
 from block import Block
+from wallet import Wallet
+from transaction import Transaction
 
 DIFFICULTY = 4
 
 blockchain = []
+
+wallet_a = Wallet()
+wallet_b = Wallet()
+
+print(f"Wallet A's priv and public keys: {wallet_a.private_key.to_string()} {wallet_a.public_key.to_string()}")
+
+transaction = Transaction(wallet_a.public_key, wallet_b.public_key, 5, None)
+transaction.generate_sig(wallet_a.private_key)
+print(f"Transaction valid: {transaction.verify_sig()}")
 
 genesis_block = Block('hi I am the first block', "0")
 print("Hash for block 0:", genesis_block.hash)
